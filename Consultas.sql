@@ -94,7 +94,7 @@ CREATE TABLE ALUMNO_TAREA (
      FOREIGN KEY (ID_ALUMNO) REFERENCES ALUMNO(ID_ALUMNO)
 );
 
-INSERT INTO USUARIO (ID, Nombre_Y_Apellidos, USERNAME, CORREO, CLAVE_CIFRADA) VALUES
+INSERT INTO ALUMNOO (ID, Nombre_Y_Apellidos, USERNAME, CORREO, CLAVE_CIFRADA) VALUES
 (1, 'Juan Perez', 'jperez', 'jperez@example.com', 'password123'),
 (2, 'Maria Lopez', 'mlopez', 'mlopez@example.com', 'securepwd456');
 
