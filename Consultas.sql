@@ -161,9 +161,11 @@ INSERT INTO CURSOS (ID_CURSOS, ID_PROFE, NOMBRE) VALUES
 (3,3, 'DAM_2024')
 
 
---7 
+--Consulta 7: Lista cursos 
+SELECT ID_CURSOS, NOMBRE FROM CURSOS, PROFE where cursos.ID_PROFE = profe.ID_PROFE;
 
---8
+--Consulta 8: alumno inserta codigo clase pero no esta aceptado
+SELECT ACEPTADO from ALUMNO_CURSOS where ALUMNO_CURSOS.aceptado = 0;
 
 --15 Huevo comun al ser aceptado 
 
