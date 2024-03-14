@@ -93,3 +93,55 @@ CREATE TABLE ALUMNO_TAREA (
     FOREIGN KEY (ID_TAREA) REFERENCES TAREA(ID_TAREA),
     NOTA VARCHAR(100),
 )
+
+INSERT INTO USUARIO (ID, NOMBRE Y APELLIDOS, USERNAME, CORREO, CLAVE CIFRADA) VALUES
+(1, 'Juan Perez', 'jperez', 'jperez@example.com', 'password123'),
+(2, 'Maria Lopez', 'mlopez', 'mlopez@example.com', 'securepwd456'),
+
+INSERT INTO PROFE (ID_PROFE, NOMBRE Y APELLIDOS, USERNAME, CORREO, CLAVE_CIFRADA) VALUES
+(1, 'Carlos Martinez', 'cmartinez', 'cmartinez@example.com', 'teacherpass789'),
+(2, 'Ana Rodriguez', 'arodriguez', 'arodriguez@example.com', 'teach2020'),
+
+INSERT INTO CURSOS (ID_CURSOS, ID-PROFE, NOMBRE) VALUES
+('C001', 1, 'Matemáticas Avanzadas'),
+('C002', 2, 'Historia del Arte'),
+
+INSERT INTO EVALUA (ID_ALUMNO, ID-ALUMNO, EVALUADOR, EVALUADO, PUNTOS, SOFTSKILLS) VALUES
+(1, 2, 3, 4, 90, 85),
+(2, 3, 4, 5, 80, 75),
+
+INSERT INTO ALUMNO_CURSOS (ID_USUARIO, ID_CURSO, ACEPTADO, CODICIA, PROGRESO) VALUES
+(1, 1, 1, 0, 50),
+(2, 2 ,0 ,1 ,25),
+
+INSERT INTO OBJETOS (ID_ITEM , CANTIDAD , ID_CURSO) VALUES
+('I001', '10 unidades', 1),
+('I002', '5 unidades', 2),
+
+INSERT INTO TIERRAS (POSICION , TIPO_TERRENO , ID_CURSO) VALUES
+(1 , 3 , 1),
+(2 , 2 , 2),
+
+INSERT INTO NOTIFICACIONES (ID_ALUMNO , ID_CURSO , TIPO , FECHA , VISTA?) VALUES
+(1 , 1 , 1 , '2024-03-14' , 0),
+(2 , 2 , 2 , '2024-03-15' , 1),
+
+INSERT INTO RANKING (ID_PROFE , ID_CURSO , ID_TAREA , PUNTUACION TOTAL) VALUES
+(1 , 1 , 1 ,'10'),
+(2 , 2 , 2 ,'3'),
+
+INSERT INTO ALUMNO_TAREA (ID_ALUMNO , ID_TAREA , NOTA) VALUES
+(1 , 1 ,'Excelente trabajo!'),
+(2 , 2 ,'Puede mejorar en la presentación.'),
+
+--Consulta 1: Crear cuenta  
+
+--Consulta 2: Log in como Alumno
+
+--Consulta 3: Cambiar icono
+
+--Consulta 4:Crear cuenta como profesor 
+
+--Consulta 5:Log in como profesor
+
+--Consulta 6:Crear curso
