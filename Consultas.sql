@@ -138,6 +138,11 @@ INSERT INTO ALUMNO_TAREA (ID_ALUMNO , ID_TAREA , NOTA) VALUES
 
 --Consulta 3: Cambiar icono
 
+UPDATE ALUMNO
+SET ICONO_DE_PERFIL = 'nuevo_icono.png'
+WHERE ID_USUARIO = <id_del_usuario>;
+
+
 --Consulta 4:Crear cuenta como profesor 
 
 --Consulta 5:Log in como profesor
@@ -147,3 +152,14 @@ INSERT INTO ALUMNO_TAREA (ID_ALUMNO , ID_TAREA , NOTA) VALUES
 --7 
 
 --8
+
+--15 Huevo comun al ser aceptado 
+
+SELECT ID_ALUMNO, ID_CURSO
+FROM ALUMNO_CURSOS
+WHERE ACEPTADO = 1; 
+
+SELECT ID_OBJETO
+FROM OBJETOS
+WHERE ID_ITEM = 'HUEVO_COMUN'; 
+
