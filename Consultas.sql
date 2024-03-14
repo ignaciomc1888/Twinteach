@@ -133,8 +133,12 @@ INSERT INTO ALUMNO_TAREA (ID_ALUMNO , ID_TAREA , NOTA) VALUES
 (2 , 2 ,'Puede mejorar en la presentación.');
 
 --Consulta 1: Crear cuenta  
+INSERT INTO ALUMNO (ID_ALUMNO, Nombre_Y_Apellidos, USERNAME, CORREO, CLAVE_CIFRADA) 
+VALUES (3, 'Pelayo Garcia', 'Pelayogarcia', 'pelayoam@gmail.com', 'jdjdjd');
 
 --Consulta 2: Log in como Alumno
+SELECT * FROM ALUMNO
+WHERE USERNAME = ' ' AND CLAVE_CIFRADA = ' ';
 
 --Consulta 3: Cambiar icono
 
@@ -145,7 +149,11 @@ WHERE ID_USUARIO = <id_del_usuario>;
 
 --Consulta 4:Crear cuenta como profesor 
 
+INSERT INTO PROFE (ID_PROFE, Nombre_Y_Apellidos, USERNAME, CORREO, CLAVE_CIFRADA) 
+VALUES (3, 'Pablo', 'Pabloescudero', 'pabloescugol@gmail.com', 'profesor536353');
 --Consulta 5:Log in como profesor
+SELECT * FROM PROFE
+WHERE USERNAME = ' ' AND CLAVE_CIFRADA = ' ';
 
 --Consulta 6:Crear curso
 
