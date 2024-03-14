@@ -1,5 +1,5 @@
 CREATE TABLE ALUMNO (
-    ID_ALUMNO int PRIMARY KEY,
+    ID_ALUMNO int PRIMARY KEY auto_increment,
     Nombre_Y_Apellidos VARCHAR(100),
     USERNAME VARCHAR(50),
     CORREO VARCHAR(200),
@@ -7,7 +7,7 @@ CREATE TABLE ALUMNO (
 );
 
 CREATE TABLE PROFE (
-    ID_PROFE int PRIMARY KEY,
+    ID_PROFE int PRIMARY KEY auto_increment,
     Nombre_Y_Apellidos VARCHAR(100),
     USERNAME VARCHAR(100),
     CORREO VARCHAR(500),
@@ -15,10 +15,10 @@ CREATE TABLE PROFE (
 );
 
 CREATE TABLE CURSOS (
-    ID_CURSOS int PRIMARY KEY ,
+    ID_CURSOS int PRIMARY KEY auto_increment,
     ID_PROFE INT,  
-    NOMBRE VARCHAR(100)
-    FOREIGN KEY (ID_PROFE) REFERENCES PROFE (ID_PROFE),
+    NOMBRE VARCHAR(100),
+    FOREIGN KEY (ID_PROFE) REFERENCES PROFE (ID_PROFE)
 );
 
 
@@ -26,17 +26,17 @@ CREATE TABLE CURSOS (
 CREATE TABLE ALUMNO_CURSOS (
     ID_ALUMNO INT,         
     ID_CURSO INT,  
-    ACEPTADO INT,
+    ACEPTADO varchar(5),
     CODICIA INT,
     PROGRESO INT,   
     primary key(id_alumno, id_curso),      
-    FOREIGN KEY (ID_CURSO) REFERENCES CURSOS(ID_CURSOS)
+    FOREIGN KEY (ID_CURSO) REFERENCES CURSOS(ID_CURSOS),
     FOREIGN KEY (ID_ALUMNO) REFERENCES ALUMNO(ID_ALUMNO)
 );
 
 CREATE TABLE OBJETOS(
-    ID_objeto  int PRIMARY KEY,
-    ID_ITEM int,
+    ID_objeto  int PRIMARY KEY auto_increment,
+    ID_ITEM varchar(50),
     CANTIDAD int,
     ID_CURSO INT,
     FOREIGN KEY (ID_CURSO) REFERENCES CURSOS(ID_CURSOS)
@@ -52,7 +52,7 @@ CREATE TABLE TIERRAS (
 );
 
 CREATE TABLE NOTIFICACIONES (
-    ID_NOTIF INT PRIMARY KEY,
+    ID_NOTIF INT PRIMARY KEY auto_increment,
     ID_ALUMNO INT,  
     TIPO INT,
     FECHA date,
@@ -64,14 +64,16 @@ CREATE TABLE NOTIFICACIONES (
 
 );
 
+create table tarea(
+    id_tarea int primary key auto_increment,
+    fecha date
+);
+
 CREATE TABLE RANKING (
-    ID_RANKING INT PRIMARY KEY ,
+    ID_RANKING INT PRIMARY KEY auto_increment,
     ID_PROFE INT,                             
-   
     ID_CURSO INT,                            
-    
     ID_TAREA INT,                            
-    
     PUNTUACION_TOTAL VARCHAR(100),
      FOREIGN KEY (ID_PROFE) REFERENCES PROFE(ID_PROFE),
      FOREIGN KEY (ID_CURSO) REFERENCES CURSOS(ID_CURSOS),
@@ -79,22 +81,19 @@ CREATE TABLE RANKING (
     
 );
 
-create table tarea(
-    id_tarea int primary key,
-    fecha date
-)
+
 
 CREATE TABLE ALUMNO_TAREA (
     ID_ALUMNO INT,                            
    NOTA VARCHAR(100),
     ID_TAREA INT,  
     primary key(id_alumno, id_tarea)  ,                          
-    FOREIGN KEY (ID_TAREA) REFERENCES TAREA(ID_TAREA)
+    FOREIGN KEY (ID_TAREA) REFERENCES TAREA(ID_TAREA),
     
      FOREIGN KEY (ID_ALUMNO) REFERENCES ALUMNO(ID_ALUMNO)
 );
 
-INSERT INTO ALUMNOO (ID, Nombre_Y_Apellidos, USERNAME, CORREO, CLAVE_CIFRADA) VALUES
+INSERT INTO ALUMNO (ID, Nombre_Y_Apellidos, USERNAME, CORREO, CLAVE_CIFRADA) VALUES
 (1, 'Juan Perez', 'jperez', 'jperez@example.com', 'password123'),
 (2, 'Maria Lopez', 'mlopez', 'mlopez@example.com', 'securepwd456');
 
@@ -134,7 +133,7 @@ INSERT INTO ALUMNO_TAREA (ID_ALUMNO , ID_TAREA , NOTA) VALUES
 
 --Consulta 1: Crear cuenta  
 INSERT INTO ALUMNO (ID_ALUMNO, Nombre_Y_Apellidos, USERNAME, CORREO, CLAVE_CIFRADA) 
-VALUES (3, 'Pelayo Garcia', 'Pelayogarcia', 'pelayoam@gmail.com', 'jdjdjd');
+VALUES (3, 'Pelayo Garcia', 'PelayoGarcia', 'pelayoam@gmail.com', 'jdjdjd');
 
 --Consulta 2: Log in como Alumno
 SELECT * FROM ALUMNO
@@ -150,12 +149,15 @@ WHERE ID_USUARIO = <id_del_usuario>;
 --Consulta 4:Crear cuenta como profesor 
 
 INSERT INTO PROFE (ID_PROFE, Nombre_Y_Apellidos, USERNAME, CORREO, CLAVE_CIFRADA) 
-VALUES (3, 'Pablo', 'Pabloescudero', 'pabloescugol@gmail.com', 'profesor536353');
+VALUES (3, 'Pablo', 'PabloEscudero', 'pabloescugol@gmail.com', 'profesor536353');
 --Consulta 5:Log in como profesor
 SELECT * FROM PROFE
 WHERE USERNAME = ' ' AND CLAVE_CIFRADA = ' ';
 
 --Consulta 6:Crear curso
+INSERT INTO CURSOS (ID_CURSOS, ID_PROFE, NOMBRE) VALUES
+(3,3, 'DAM_2024')
+
 
 --7 
 
