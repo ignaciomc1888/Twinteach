@@ -93,39 +93,41 @@ CREATE TABLE ALUMNO_TAREA (
      FOREIGN KEY (ID_ALUMNO) REFERENCES ALUMNO(ID_ALUMNO)
 );
 
-INSERT INTO ALUMNO (ID, Nombre_Y_Apellidos, USERNAME, CORREO, CLAVE_CIFRADA) VALUES
-(1, 'Juan Perez', 'jperez', 'jperez@example.com', 'password123'),
-(2, 'Maria Lopez', 'mlopez', 'mlopez@example.com', 'securepwd456');
+INSERT INTO ALUMNO (Nombre_Y_Apellidos, USERNAME, CORREO, CLAVE_CIFRADA) VALUES
+('Juan Perez', 'jperez', 'jperez@example.com', 'password123'),
+('Maria Lopez', 'mlopez', 'mlopez@example.com', 'securepwd456');
 
-INSERT INTO PROFE (ID_PROFE, Nombre_Y_Apellidos, USERNAME, CORREO, CLAVE_CIFRADA) VALUES
-(1, 'Carlos Martinez', 'cmartinez', 'cmartinez@example.com', 'teacherpass789'),
-(2, 'Ana Rodriguez', 'arodriguez', 'arodriguez@example.com', 'teach2020');
+INSERT INTO PROFE (Nombre_Y_Apellidos, USERNAME, CORREO, CLAVE_CIFRADA) VALUES
+('Carlos Martinez', 'cmartinez', 'cmartinez@example.com', 'teacherpass789'),
+('Ana Rodriguez', 'arodriguez', 'arodriguez@example.com', 'teach2020');
 
-INSERT INTO CURSOS (ID_CURSOS, ID_PROFE, NOMBRE) VALUES
-('1', 1, 'Matemáticas Avanzadas'),
-('2', 2, 'Historia del Arte');
+INSERT INTO CURSOS (ID_PROFE, NOMBRE) VALUES
+(1, 'Matemáticas Avanzadas'),
+(2, 'Historia del Arte');
 
 
 
-INSERT INTO ALUMNO_CURSOS (ID_USUARIO, ID_CURSO, ACEPTADO, CODICIA, PROGRESO) VALUES
-(1, 1, 1, 0, 50),
-(2, 2 ,0 ,1 ,25);
+INSERT INTO ALUMNO_CURSOS (ID_alumno, ID_CURSO, ACEPTADO, CODICIA, PROGRESO) VALUES
+(1, 1, '1', 0, 50),
+(2, 2 ,'0' ,1 ,25);
 
-INSERT INTO OBJETOS (id_objeto, ID_ITEM , CANTIDAD , ID_CURSO) VALUES
-(1, '1', '10 unidades', 1),
-(2, '2', '5 unidades', 2);
+INSERT INTO OBJETOS (ID_ITEM , CANTIDAD , ID_CURSO) VALUES
+('1', '10', 1),
+('2', '5', 2);
 
 INSERT INTO TIERRAS (POSICION , TIPO_TERRENO , ID_CURSO) VALUES
 (1 , 3 , 1),
 (2 , 2 , 2);
 
-INSERT INTO NOTIFICACIONES (id_notif, ID_ALUMNO , ID_CURSO , TIPO , FECHA , VISTA) VALUES
-(1, 1 , 1 , 1 , '2024-03-14' , 0),
-(2, 2 , 2 , 2 , '2024-03-15' , 1);
+INSERT INTO NOTIFICACIONES (ID_ALUMNO , ID_CURSO , TIPO , FECHA , VISTA) VALUES
+(1 , 1 , 1 , '2024-03-14' , 0),
+(2 , 2 , 2 , '2024-03-15' , 1);
 
-INSERT INTO RANKING (id_ranking, ID_PROFE , ID_CURSO , ID_TAREA , PUNTUACION_TOTAL) VALUES
-(1, 1 , 1 , 1 ,'10'),
-(2, 2 , 2 , 2 ,'3');
+insert into tarea(fecha) values("2022-10-14"),("2023-12-24");
+
+INSERT INTO RANKING (ID_PROFE , ID_CURSO , ID_TAREA , PUNTUACION_TOTAL) VALUES
+(1 , 1 , 1 ,'10'),
+(2 , 2 , 2 ,'3');
 
 INSERT INTO ALUMNO_TAREA (ID_ALUMNO , ID_TAREA , NOTA) VALUES
 (1 , 1 ,'Excelente trabajo!'),
