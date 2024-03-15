@@ -24,12 +24,12 @@ CREATE TABLE CURSOS (
 
 
 CREATE TABLE ALUMNO_CURSOS (
+    id_alumno_cursos int primary key auto_increment,
     ID_ALUMNO INT,         
     ID_CURSO INT,  
     ACEPTADO varchar(5),
     CODICIA INT,
-    PROGRESO INT,   
-    primary key(id_alumno, id_curso),      
+    PROGRESO INT,        
     FOREIGN KEY (ID_CURSO) REFERENCES CURSOS(ID_CURSOS),
     FOREIGN KEY (ID_ALUMNO) REFERENCES ALUMNO(ID_ALUMNO)
 );
@@ -39,7 +39,9 @@ CREATE TABLE OBJETOS(
     ID_ITEM varchar(50),
     CANTIDAD int,
     ID_CURSO INT,
-    FOREIGN KEY (ID_CURSO) REFERENCES CURSOS(ID_CURSOS)
+    id_alumno int,
+    FOREIGN KEY (ID_CURSO) REFERENCES CURSOS(ID_CURSOS),
+    FOREIGN key(id_alumno) references alumno(id_alumno)
 );
 
 
@@ -85,7 +87,7 @@ CREATE TABLE RANKING (
 
 CREATE TABLE ALUMNO_TAREA (
     ID_ALUMNO INT,                            
-   NOTA VARCHAR(100),
+   NOTA int,
     ID_TAREA INT,  
     primary key(id_alumno, id_tarea)  ,                          
     FOREIGN KEY (ID_TAREA) REFERENCES TAREA(ID_TAREA),
@@ -105,6 +107,8 @@ INSERT INTO CURSOS (ID_PROFE, NOMBRE) VALUES
 (1, 'Matemáticas Avanzadas'),
 (2, 'Historia del Arte');
 
+
+UPDATE objetos SET cantidad = 5 WHERE id_item = 2 AND id_curso = ( SELECT c.id_cursos FROM cursos c, alumno_cursos a WHERE c.id_cursos = a.id_curso AND aceptado = 1 ); 
 
 
 INSERT INTO ALUMNO_CURSOS (ID_alumno, ID_CURSO, ACEPTADO, CODICIA, PROGRESO) VALUES
@@ -145,7 +149,7 @@ WHERE USERNAME = ' ' AND CLAVE_CIFRADA = ' ';
 
 UPDATE ALUMNO
 SET ICONO_DE_PERFIL = 'nuevo_icono.png'
-WHERE ID_USUARIO = <id_del_usuario>;
+WHERE ID_USUARIO = 'id_del_usuario';
 
 
 --Consulta 4:Crear cuenta como profesor 
@@ -161,17 +165,88 @@ INSERT INTO CURSOS (ID_CURSOS, ID_PROFE, NOMBRE) VALUES
 (3,3, 'DAM_2024')
 
 
---7 
+--Consulta 7: Lista cursos  
 
---8
+SELECT ID_CURSOS, NOMBRE FROM CURSOS, PROFE where cursos.ID_PROFE = profe.ID_PROFE; 
+
+ 
+
+--Consulta 8: alumno inserta codigo clase pero no esta aceptado 
+
+SELECT ACEPTADO from ALUMNO_CURSOS where ALUMNO_CURSOS.aceptado = 0; 
+
+--9 aceptar al alumno en la clase como profesor 
+
+Update alumno_cursos set aceptado = 1 where id_alumno= '';
+
+--10 listas de los alumnos que hay en el curso 
+
+select id_alumno, id_curso from alumno_cursos order by id_curso;  
+
+--11 lista del profesor 
+
+select nombre, nombre_y_apellidos from cursos, profe where cursos.id_profe = profe.id_profe; 
+
+--12 que aparezca el alumno aceptado en la clase 
+
+SELECT ACEPTADO, nombre_y_apellidos from ALUMNO_CURSOS, Alumno where alumno_cursos.id_alumno = alumno.id_alumno and aceptado = 1; 
+
+--13 cinco monedas de oro solo por ser aceptado 
+
+UPDATE objetos SET cantidad = (cantidad + 5) WHERE id_item = 1 AND (SELECT cursos.id_cursos FROM cursos, alumno_cursos WHERE cursos.id_cursos = alumno_cursos.id_curso AND aceptado = 1); 
+
+--14 cofre de madera solo por ser aceptado 
+
+UPDATE objetos SET cantidad = (cantidad + 1) WHERE id_item = 2 AND (SELECT cursos.id_cursos FROM cursos, alumno_cursos WHERE cursos.id_cursos = alumno_cursos.id_curso AND aceptado = 1); 
 
 --15 Huevo comun al ser aceptado 
 
-SELECT ID_ALUMNO, ID_CURSO
-FROM ALUMNO_CURSOS
-WHERE ACEPTADO = 1; 
+UPDATE objetos SET cantidad = (cantidad + 1) WHERE id_item = 3 AND (SELECT cursos.id_cursos FROM cursos, alumno_cursos WHERE cursos.id_cursos = alumno_cursos.id_curso AND aceptado = 1); 
 
-SELECT ID_OBJETO
-FROM OBJETOS
-WHERE ID_ITEM = 'HUEVO_COMUN'; 
+--16 abrir el cofre de madera 
+
+UPDATE objetos SET cantidad = (cantidad - 1) WHERE id_item = 2 AND (SELECT cursos.id_cursos FROM cursos, alumno_cursos WHERE cursos.id_cursos = alumno_cursos.id_curso AND aceptado = 1); 
+
+--17 insert con todos los objetos que tocarian en el cofre de madera 
+INSERT INTO OBJETOS (ID_ITEM , CANTIDAD , ID_CURSO, id_alumno) VALUES (1,  5,  1, 1),(56, 1, 1, 1), (200, 1,1,1); 
+
+--18 monedas id 1 update en el apartado de monedas 
+
+UPDATE objetos SET cantidad = (cantidad + 5) WHERE id_item = 1; 
+
+--19 piedra de fuego id 56 insert  
+
+Insert into objetos(id_item, cantidad, ID_CURSO, id_alumno) values (56, 1, 1, 1); 
+
+--20 calabaza id 50 insert 
+
+Insert into objetos(id_item, cantidad, ID_CURSO, id_alumno) values (50, 1, 1, 1); 
+
+--21 entrar al pueblo hacer un select de id entre 200 y 500 que son los chibis 
+
+Select id_objeto from objetos where id_objeto between 200 and 500; 
+
+--22 crear un ranking con la cuenta de profesor insert y un create al crear la tarea tambien hay que crear una tabla que se llama participa en donde estaran las notas 
+
+ Insert into ranking(id_profe,id_curso,id_tarea,puntuacion_total) values (1,1,1,0); 
+
+ --23 cambiamos las notas con un update de las notas 
+
+ Update alumno_tarea set nota = '' where nota = '';
+
+ --24 entregamos recompensas que seria un update de la tabla inventario 
+
+  Update objetos set cantidad = cantidad + 1 where id_item = 5; 
+
+  --25 hacer una consulta que te enseñe los rankings del curso (siendo alumno) 
+
+   Select id_ranking as Nombre, ranking.id_profe as profesor, id_tarea as Tarea, puntuacion_total as PuntuacionTotal from ranking, cursos where cursos.id_cursos=ranking.id_curso and ranking.id_profe = cursos.id_profe; 
+
+   -- 26 para usar el inventario estamos haciendo un select de toda la tabla objetos hay como condicion el id del curso que sea el curso en el que estamos hay como condicion el id del alumno y otra condicion que el numero sea mayor que 0 
+
+   Select * from objetos o, alumno_cursos ac where o.id_curso=ac.id_curso and o.id_alumno=ac.id_alumno and cantidad >0; 
+
+   --27 hacer una tabla con las notificaciones
+
+   Select fecha, tipo, vista, id_notif from notificaciones; 
 
