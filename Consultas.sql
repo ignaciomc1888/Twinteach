@@ -167,7 +167,7 @@ SELECT ID_CURSOS, NOMBRE FROM CURSOS, PROFE where cursos.ID_PROFE = profe.ID_PRO
 --Consulta 8: alumno inserta codigo clase pero no esta aceptado
 SELECT ACEPTADO from ALUMNO_CURSOS where ALUMNO_CURSOS.aceptado = 0;
 
---15 Huevo comun al ser aceptado 
+--Consulta 15: Huevo comun al ser aceptado
 
 SELECT ID_ALUMNO, ID_CURSO
 FROM ALUMNO_CURSOS
